@@ -1,41 +1,153 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>Valentine Letter</title>
+
 <style>
-body {
-  background: #ffe6f0;
-  text-align: center;
-  font-family: Arial;
+body{
+  margin:0;
+  height:100vh;
+  background:#0f1b2b;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:Arial;
+  overflow:hidden;
 }
 
-.box {
-  margin-top: 100px;
-  padding: 30px;
-  background: white;
-  display: inline-block;
-  border-radius: 20px;
-  box-shadow: 0 0 20px pink;
+/* กล่องหน้าต่าง */
+.window{
+  background:#ffd6e0;
+  width:350px;
+  border-radius:15px;
+  box-shadow:0 0 30px hotpink;
+  text-align:center;
+  position:relative;
+  animation:pop 0.6s ease;
 }
 
-button {
-  padding: 10px 20px;
-  margin: 10px;
-  border: none;
-  background: pink;
-  cursor: pointer;
-  border-radius: 10px;
+@keyframes pop{
+  from{transform:scale(0);}
+  to{transform:scale(1);}
+}
+
+/* แถบบน */
+.topbar{
+  background:#ff9bb3;
+  padding:10px;
+  border-top-left-radius:15px;
+  border-top-right-radius:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.topbar span{
+  font-weight:bold;
+  color:white;
+}
+
+.hearts{
+  font-size:18px;
+}
+
+/* เนื้อหา */
+.content{
+  padding:30px;
+  background:#ffeaf0;
+}
+
+.cat{
+  width:120px;
+  margin:10px 0;
+  animation:bounce 1.5s infinite;
+}
+
+@keyframes bounce{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-8px);}
+}
+
+.buttons{
+  margin-top:20px;
+  position:relative;
+}
+
+button{
+  padding:10px 20px;
+  margin:5px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.yes{
+  background:hotpink;
+  color:white;
+}
+
+.no{
+  background:lightgray;
+  position:absolute;
+}
+
+/* หน้าที่สอง */
+.letter{
+  display:none;
 }
 
 </style>
 </head>
 <body>
 
-<div class="box">
-  <h1>Be My Valentine? 💖</h1>
-  <button onclick="alert('Yayyy 💕')">Yes</button>
-  <button onclick="alert('Oh no 😢')">No</button>
+<div class="window" id="page1">
+  <div class="topbar">
+    <span>LOVE</span>
+    <div class="hearts">❤️ ❤️ ❤️</div>
+  </div>
+  <div class="content">
+    <h2>Will You Be My Valentine? 💖</h2>
+    <img class="cat" src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
+    <div class="buttons">
+      <button class="yes" onclick="openLetter()">Yes 💕</button>
+      <button class="no" onmouseover="moveNo()">No 😢</button>
+    </div>
+  </div>
 </div>
+
+<div class="window letter" id="page2">
+  <div class="topbar">
+    <span>LOVE</span>
+    <div class="hearts">❤️ ❤️ ❤️</div>
+  </div>
+  <div class="content">
+    <h2>Yippee!! 💕</h2>
+    <img class="cat" src="https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif">
+    <p>
+      Valentine Date 💌<br><br>
+      📍 Restaurant at 1 PM<br>
+      👗 Dress Fancy<br><br>
+      I can't wait to spend this day with you ❤️
+    </p>
+  </div>
+</div>
+
+<script>
+function moveNo(){
+  const btn = document.querySelector(".no");
+  const x = Math.random() * 250;
+  const y = Math.random() * 100;
+  btn.style.left = x + "px";
+  btn.style.top = y + "px";
+}
+
+function openLetter(){
+  document.getElementById("page1").style.display="none";
+  document.getElementById("page2").style.display="block";
+}
+</script>
 
 </body>
 </html>
+
